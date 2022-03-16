@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb62ba18d853ac944ab3964ff50b732c, type: 3}
+  m_Name: SkillEffectData
+  m_EditorClassIdentifier: 
+  associatedSheet: 1PIKw8yLTuRkhmduXJVjnu207y8LdB9YDrHD8GDqfwWA
+  associatedWorksheet: SkillEffect
+  _SID:
+  - s_effect000
+  - s_effect001
+  - s_effect002
+  - s_effect003
+  - s_effect004
+  - s_effect005
+  - s_effect006
+  - s_effect007
+  - s_effect008
+  - s_effect009
+  - s_effect010
+  - s_effect011
+  - s_effect012
+  - s_effect013
+  - s_effect014
+  - s_effect015
+  - s_effect016
+  - s_effect017
+  - s_effect018
+  - s_effect019
+  - s_effect020
+  - s_effect021
+  - s_effect022
+  - s_effect023
+  - s_effect024
+  - s_effect025
+  - s_effect026
+  - s_effect027
+  - s_effect028
+  - s_effect029
+  - s_effect030
+  - s_effect031
+  - s_effect032
+  - s_effect033
+  - s_effect034
+  - s_effect035
+  - s_effect036
+  - s_effect037
+  - s_effect038
+  - s_effect039
+  - s_effect040
+  - s_effect041
+  - s_effect042
+  - s_effect043
+  - s_effect044
+  - s_effect045
+  - s_effect046
+  - s_effect047
+  - s_effect048
+  - s_effect049
+  - s_effect050
+  - s_effect051
+  - s_effect052
+  - s_effect053
+  - s_effect054
+  - s_effect055
+  - s_effect056
+  - s_effect057

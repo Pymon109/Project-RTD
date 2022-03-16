@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb97daeaa9d22534fad3476addce0d44, type: 3}
+  m_Name: SkillData
+  m_EditorClassIdentifier: 
+  associatedSheet: 1PIKw8yLTuRkhmduXJVjnu207y8LdB9YDrHD8GDqfwWA
+  associatedWorksheet: Skill
+  _SID:
+  - skill000
+  - skill001
+  - skill002
+  - skill003
+  - skill004
+  - skill005
+  - skill006
+  - skill007
+  - skill008
+  - skill009
+  - skill010
+  - skill011
+  - skill012
+  - skill013
+  - skill014
+  - skill015
+  - skill016
+  - skill017
+  - skill018
+  - skill019
+  - skill020
+  - skill021
+  - skill022
+  - skill023
+  - skill024
+  - skill025
+  - skill026
+  - skill027
+  - skill028
+  - skill029
+  - skill030
+  - skill031
+  - skill032
+  - skill033
+  - skill034
+  - skill035
+  - skill036
+  - skill037
+  - skill038
+  - skill039
+  - skill040
+  - skill041
+  - skill042
