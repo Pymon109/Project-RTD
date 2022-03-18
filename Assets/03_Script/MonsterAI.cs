@@ -59,7 +59,7 @@ public class MonsterAI : MonoBehaviour
                     //최종 목적지까지 도달
                     _monster_this.Attack();
                     //폭발 이펙트
-                    EffectManager._instance.CreateGoalInEffect(transform.position);
+                    GameManager.instance.effectManager.CreateGoalInEffect(transform.position);
                     _monster_this.Death();
                     return;
                 }

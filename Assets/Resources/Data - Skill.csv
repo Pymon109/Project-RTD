@@ -1,0 +1,44 @@
+_skillID,_sid,_name,_trigger_condition,_cast_chance,_cooltime,_effect_1,_effect_2,_effect_3,_casting_time,_comment
+skill000,0,전략적 후퇴,SELL,1,0,s_effect000,,,0,전략적 후퇴 comment
+skill001,1,오메가 폭발,ATTACK,0.3,8,s_effect001,,,0,오메가 폭발 comment
+skill002,2,포이즌 스플래터,NONE,1,6,s_effect002,s_effect003,,0.7,포이즌 스플래터 comment
+skill003,3,갑옷 쪼개기,NONE,1,5,s_effect004,s_effect005,,0.7,갑옷 쪼개기 comment
+skill004,4,영거리 사격,NONE,1,6,s_effect006,,,0.7,영거리 사격 comment
+skill005,5,피어싱 샷,NONE,1,5,s_effect007,,,0.7,피어싱 샷 comment
+skill006,6,사냥 개시,SELL,1,0,s_effect008,,,0,사냥 개시 comment
+skill007,7,퍼펙트 스윙,NONE,1,5,s_effect009,s_effect010,,0.7,퍼펙트 스윙 comment
+skill008,8,자긍심,TOWER,1,-1,s_effect011,,,0,자긍심 comment
+skill009,9,비장의 무기,NONE,1,5,s_effect012,,,0.7,비장의 무기 comment
+skill010,10,대지 가르기,NONE,1,8,s_effect013,,,0.7,대지 가르기 comment
+skill011,11,악취미,ROUNDSTART,1,0,s_effect014,,,0,악취미 comment
+skill012,12,불릿 댄스,NONE,1,9,s_effect015,,,0.7,불릿 댄스 comment
+skill013,13,펄스 캐논,NONE,1,3,s_effect016,s_effect017,s_effect018,0.7,펄스 캐논 comment
+skill014,14,사랑의 낙인,NONE,1,8,s_effect019,s_effect020,,0.7,사랑의 낙인 comment
+skill015,15,지역 소거,NONE,1,8,s_effect021,s_effect022,,0.7,지역 소거 comment
+skill016,16,활성의 물결,NONE,1,8,s_effect023,,,0.7,활성의 물결 comment
+skill017,17,응급 치료 키트,SELL,1,0,s_effect024,,,0,응급 치료 키트 comment
+skill018,18,트리플 악셀,NONE,1,4,s_effect025,,,0.7,트리플 악셀 comment
+skill019,19,바닥쓸이,NONE,1,6,s_effect026,s_effect027,,0.7,바닥쓸이 comment
+skill020,20,엑시스 지휘관,ROUNDSTART,1,0,s_effect028,,,0,엑시스 지휘관 comment
+skill021,21,공명 에너지,CONTINUE,1,0,s_effect029,,,0,공명 에너지 comment
+skill022,22,순살,NONE,1,6,s_effect030,,,0.7,순살 comment
+skill023,23,교통 사고!,NONE,1,7,s_effect031,s_effect032,,0.7,교통 사고! comment
+skill024,24,에너지 폭풍,NONE,1,6,s_effect033,,,0.7,에너지 폭풍 comment
+skill025,25,에너지 흐름,CONTINUE,1,0,s_effect034,,,0,에너지 흐름 comment
+skill026,26,디아볼릭 버스트,NONE,1,10,s_effect035,,,0.7,디아볼릭 버스트 comment
+skill027,27,철혈의 카리스마,ROUNDSTART,1,0,s_effect036,,,0,철혈의 카리스마 comment
+skill028,28,데몰리션 스피어,ATTACK,3,0,s_effect037,s_effect038,,0.7,데몰리션 스피어 comment
+skill029,29,파괴 충동,TOWER,1,0,s_effect039,,,0,파괴 충동 comment
+skill030,30,파동 충격,NONE,1,8,s_effect040,s_effect041,,0.7,파동 충격 comment
+skill031,31,에너지 보급,ROUNDSTART,1,0,s_effect042,,,0,에너지 보급 comment
+skill032,32,윈드브레이커,NONE,1,7,s_effect043,s_effect044,s_effect045,0.7,윈드브레이커 comment
+skill033,33,그녀의 응원방식,NONE,1,8,s_effect046,,,0.7,그녀의 응원방식 comment
+skill034,34,다다익선,TOWER,1,0,s_effect047,,,0,다다익선 comment
+skill035,35,장미 덩굴,NONE,1,15,s_effect048,s_effect049,,0.7,장미 덩굴 comment
+skill036,36,생기 흡수,DEBUFF,1,0,s_effect050,,,0.7,생기 흡수 comment
+skill037,37,부패의 폭풍,NONE,1,5,s_effect051,s_effect052,,0.7,부패의 폭풍 comment
+skill038,38,히든 슈터,ATTACK,0.25,0,s_effect053,,,0,히든 슈터 comment
+skill039,39,무대 출연,BUFF,1,0,s_effect054,,,0.7,무대 출연 comment
+skill040,40,전포문 개방,NONE,1,8,s_effect055,,,0.7,전포문 개방 comment
+skill041,41,종말의 포화,NONE,-1,-1,s_effect056,,,0.7,종말의 포화 comment
+skill042,42,방해 전파,NONE,-1,-1,s_effect057,,,0.7,방해 전파 comment

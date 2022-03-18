@@ -63,9 +63,9 @@ public class Tile : MonoBehaviour
         switch (_currentState)
         {
             case E_TileState.NONE:
-                if (Input.GetKeyDown(KeyCode.D) || TileControl._instance.m_mouseCon.DetectSelectTile())
+                if (Input.GetKeyDown(KeyCode.D) || GameManager.instance.tileManager.m_mouseCon.DetectSelectTile())
                 {
-                    if (Player._instance.SpendGold(100))
+                    if (GameManager.instance.player.SpendGold(100))
                     {
                         CreateUnit();
                         SetMergeble();
@@ -73,9 +73,9 @@ public class Tile : MonoBehaviour
                 }
                 break;
             case E_TileState.MERGEABLE:
-                if (Input.GetKeyDown(KeyCode.D) || TileControl._instance.m_mouseCon.DetectSelectTile())
+                if (Input.GetKeyDown(KeyCode.D) || GameManager.instance.tileManager.m_mouseCon.DetectSelectTile())
                 {
-                    TileControl._instance.MergeUnit();
+                    GameManager.instance.tileManager.MergeUnit();
                     SetMergeble();
                 }
                 OperateKeySystem();
@@ -134,7 +134,7 @@ public class Tile : MonoBehaviour
     {
         if (_unit)
         {
-            Player._instance.AddGold(_unit.GetSellPoint());
+            GameManager.instance.player.AddGold(_unit.GetSellPoint());
             //유닛 파는 이펙트
             
             Skill[] skills = _unit.GetSkills();
@@ -164,7 +164,7 @@ public class Tile : MonoBehaviour
                 _unit.Switchㅣock(true);
             }
             SetMergeble();
-            TileControl._instance.EffectSwitcher(true);
+            GameManager.instance.tileManager.EffectSwitcher(true);
         }
     }
 
@@ -192,13 +192,15 @@ public class Tile : MonoBehaviour
             nextSID = rank * 100 + nextID;
         }
 
-        UnitObjectPool unitPool = (UnitObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.UNIT];
+        //UnitObjectPool unitPool = (UnitObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.UNIT];
+        UnitObjectPool unitPool = (UnitObjectPool)GameManager.instance.objectPoolManager.
+            m_pools[(int)ObjectPoolManager.E_POOL_TYPE.UNIT];
         GameObject newobj = unitPool.GetPool(nextSID).GetObject(transform);
         newobj.transform.position = transform.position;
         _unit = newobj.GetComponent<Unit>();
 
-        UnitManager._instance.AddUnitOnTile(int.Parse(gameObject.name), _unit.GetSID());
-        TeamManager._instance.AddUnit(_unit.GetTeam(), _unit.GetRank());
+        GameManager.instance.unitManager.AddUnitOnTile(int.Parse(gameObject.name), _unit.GetSID());
+        GameManager.instance.teamManager.AddUnit(_unit.GetTeam(), _unit.GetRank());
         //_unit.InitUnit_forCreate();
 
         //mergeble인지 파악하기.
@@ -208,8 +210,8 @@ public class Tile : MonoBehaviour
     public void SetMergeble()
     {
         if(_unit.GetRank() != UnitManager.E_Rank.EPIC)
-            if (TileControl._instance.FindSameUnit(_unit))
-                TileControl._instance.EffectSwitcher(true);
+            if (GameManager.instance.tileManager.FindSameUnit(_unit))
+                GameManager.instance.tileManager.EffectSwitcher(true);
             else
                 SetTileState(E_TileState.MERGE_NOT_ALLOWED);
         else
@@ -218,7 +220,7 @@ public class Tile : MonoBehaviour
 
     public void DeleteUnit()
     {
-        UnitManager._instance.DeleteUnitOnTile(int.Parse(gameObject.name), _unit.GetSID());
+        GameManager.instance.unitManager.DeleteUnitOnTile(int.Parse(gameObject.name), _unit.GetSID());
         _unit.DeleteThisUnit();
         //Destroy(_unit.gameObject);
         _unit = null;

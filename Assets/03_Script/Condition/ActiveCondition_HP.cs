@@ -8,7 +8,7 @@ public class ActiveCondition_HP : ActiveCondition
     int _targetHP;
     public override bool ActiveTriger()
     {
-        if (Player._instance.GetHP() <= _targetHP)
+        if (GameManager.instance.player.GetHP() <= _targetHP)
             return true;
         else
             return false;

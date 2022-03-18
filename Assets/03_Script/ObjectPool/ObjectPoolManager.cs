@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ObjectPoolManager : MonoBehaviour
 {
-    static ObjectPoolManager unique;
-    public static ObjectPoolManager instance { get { return unique; } }
     public Transform trsTemplete;
     public Transform trsDynamicObjects;
 
@@ -19,9 +17,11 @@ public class ObjectPoolManager : MonoBehaviour
         MAXCOUNT
     }
     public List<ObjectPoolSubMaster> m_pools;
-
-    private void Awake()
+    public bool IsPoolReady()
     {
-        unique = this;
+        bool ready = true;
+        for (int i = 0; i < m_pools.Count; i++)
+            ready &= m_pools[i].bPoolReady;
+        return ready;
     }
 }

@@ -33,11 +33,18 @@ public class GUI_CouponUnitCard_Element : MonoBehaviour
         if(portraitIMG)
             _img_portrait.sprite = portraitIMG;
 
-        UnitData.s_unitInfo unitInfo = DataManager._instance.GetUnitInfo(SID);
+        //UnitData.s_unitInfo unitInfo = GameManager.instance.dataManager.GetUnitInfo(SID);
+        string unitID = "u";
+        if (SID < 10)
+            unitID += "00";
+        else if (SID < 100)
+            unitID += "0";
+        unitID += SID.ToString();
+        UnitData.s_unitInfo unitInfo = GameManager.instance.fileManager.GetUnitInfo(unitID);
         _txt_unitName.text = unitInfo._name;
 
         int count = 0;
-        count = UnitManager._instance.CountOfThisUnit(SID);
+        count = GameManager.instance.unitManager.CountOfThisUnit(SID);
         _txt_count.text = count.ToString();
         if (count < 1)
             _txt_count.gameObject.SetActive(false);
@@ -57,10 +64,10 @@ public class GUI_CouponUnitCard_Element : MonoBehaviour
 
     public void ButtonOnCreateUnit()
     {
-        if(TileControl._instance.couponUnitCreate(_unitSID))
+        if(GameManager.instance.tileManager.couponUnitCreate(_unitSID))
         {
-            CouponManager._instance.ReduceCouponCount(_unitSID / 100);
-            TileControl._instance.SwitchCouponMode(false);
+            GameManager.instance.couponManager.ReduceCouponCount(_unitSID / 100);
+            GameManager.instance.tileManager.SwitchCouponMode(false);
         }
     }
 }

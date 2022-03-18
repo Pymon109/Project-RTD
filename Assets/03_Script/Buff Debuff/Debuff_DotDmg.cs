@@ -21,7 +21,7 @@ public class Debuff_DotDmg : Buff
             타겟 . 히트 (데미지 + (데제 * 0.1 * 업그레이드 레벨)
              */
 
-            int realDMG = (int)(_damage * (1 + TeamManager._instance.GetLevel(_team) * 0.1));
+            int realDMG = (int)(_damage * (1 + GameManager.instance.teamManager.GetLevel(_team) * 0.1));
             Monster targetMonster = _target.GetComponent<Monster>();
             if (_property.IsSameProperty(targetMonster.GetProperty()))
             {

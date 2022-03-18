@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class MissionManager : MonoBehaviour
 {
-    static MissionManager _unique;
-    public static MissionManager _instance { get { return _unique; } }
-
     List<Mission> _list_missions;
 
     [SerializeField]
@@ -31,7 +28,6 @@ public class MissionManager : MonoBehaviour
 
     private void Awake()
     {
-        _unique = this;
         _list_missions = new List<Mission>();
         for (int i = 0; i < transform.childCount; i++)
         {

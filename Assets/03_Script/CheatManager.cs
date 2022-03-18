@@ -12,11 +12,11 @@ public class CheatManager : MonoBehaviour
 
     void ShowMeTheMoney()
     {
-        Player._instance.AddGold(10000);
+        GameManager.instance.player.AddGold(10000);
     }
     void AddCoupon(UnitManager.E_Rank rank)
     {
-        CouponManager._instance.GainCoupon(rank);
+        GameManager.instance.couponManager.GainCoupon(rank);
     }
     private void OnGUI()
     {

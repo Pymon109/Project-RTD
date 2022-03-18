@@ -9,7 +9,8 @@ public class RoundBuilder : Builder
         GameObject newRound = new GameObject(roundID);
 
         //데이터 가져오기
-        RoundData.s_roundInfo roundInfo = DataManager._instance.GetRoundDataInfo(roundID);
+        //RoundData.s_roundInfo roundInfo = GameManager.instance.dataManager.GetRoundDataInfo(roundID);
+        RoundData.s_roundInfo roundInfo = GameManager.instance.fileManager.GetRoundInfo(roundID);
 
         //라운드 스크립트 붙이기
         //monster
@@ -43,7 +44,7 @@ public class RoundBuilder : Builder
         round.SetRound(roundInfo._round, roundInfo._waitingTime, prefabMonsterObj, roundInfo._monsterCount, roundInfo._rewardGold, isBossRound);
         round.property = property;
         newRound.name = roundInfo._round.ToString();
-        newRound.transform.SetParent(RoundManager._instance.gameObject.transform);
+        newRound.transform.SetParent(GameManager.instance.roundManager.gameObject.transform);
 
         return newRound;
     }

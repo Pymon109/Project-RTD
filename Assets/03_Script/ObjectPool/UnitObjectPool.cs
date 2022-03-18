@@ -23,5 +23,6 @@ public class UnitObjectPool : ObjectPoolSubMaster
             m_pools.Add(pool.gameObject.name, pool);
             //m_keys.Add(pool.prefabName);
         }
+        m_bPoolReady = true;
     }
 }

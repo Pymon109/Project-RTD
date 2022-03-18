@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GUIManager : MonoBehaviour
 {
-    static GUIManager _unique;
-    public static GUIManager _instance { get { return _unique; } }
+/*    static GUIManager _unique;
+    public static GUIManager _instance { get { return _unique; } }*/
 
     [SerializeField]
     List<GameObject> _list_gui;
@@ -39,7 +39,7 @@ public class GUIManager : MonoBehaviour
         switch(command)
         {
             case E_GUI_STATE.PLAY:
-                SoundManager._instance.BGMStart();
+                GameManager.instance.soundManager.BGMStart();
                 Time.timeScale = 1;
                 break;
             case E_GUI_STATE.CLEAR:
@@ -68,7 +68,7 @@ public class GUIManager : MonoBehaviour
 
     private void Awake()
     {
-        _unique = this;
+        //_unique = this;
     }
     private void Start()
     {

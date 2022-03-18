@@ -62,8 +62,8 @@ public class Monster : MonoBehaviour
 
     [SerializeField] int _ATK;
     public void Attack() 
-    { 
-        Player._instance.Hit(_ATK); 
+    {
+        GameManager.instance.player.Hit(_ATK); 
     }
 
     [SerializeField] int _DEF;
@@ -111,16 +111,16 @@ public class Monster : MonoBehaviour
 
         int realDMG = (int)(dmg * (1 - GetDEFChance() - GetRealREG(property)));
         _HP -= realDMG;
-        EffectManager._instance.CreateTextEffect(_pos_dmgEffect.position, realDMG.ToString(),property);
+        GameManager.instance.effectManager.CreateTextEffect(_pos_dmgEffect.position, realDMG.ToString(),property);
         if (_HP <= 0)
         {
             //골드 드랍
             if (_gold > 0)
                 GoldDrop();
             else
-                EffectManager._instance.CreateMonsterDeathEffect(transform.position);
+                GameManager.instance.effectManager.CreateMonsterDeathEffect(transform.position);
             if(gameObject.tag == "GoldMonster")
-                GoldMonsterManager._instance.IncreaseLevel();
+                GameManager.instance.goldMonsterManaer.IncreaseLevel();
             Death();
         }
         else
@@ -130,13 +130,13 @@ public class Monster : MonoBehaviour
     [SerializeField] int _gold;
     protected void GoldDrop()
     {
-        Player._instance.AddGold(_gold);
+        GameManager.instance.player.AddGold(_gold);
         //골드 흩뿌리는 이펙트
         /*        GameObject prefap = Resources.Load<GameObject>("Prefabs/Effect/" + _prefap_goldEffect.name);
                 GameObject newobj = Instantiate(prefap, _pos_dmgEffect.position, prefap.transform.rotation);*/
 
-        EffectManager._instance.CreateGoldEffect(_pos_dmgEffect.position);
-        EffectManager._instance.CreateTextEffect(_pos_dmgEffect.position, _gold.ToString(), EffectManager.E_TEXT_EFFECT_TYPE.GOLDMONSTER_DROP);
+        GameManager.instance.effectManager.CreateGoldEffect(_pos_dmgEffect.position);
+        GameManager.instance.effectManager.CreateTextEffect(_pos_dmgEffect.position, _gold.ToString(), EffectManager.E_TEXT_EFFECT_TYPE.GOLDMONSTER_DROP);
     }
 
     [SerializeField] BuffDebuffSlot _buffslot;
@@ -146,7 +146,9 @@ public class Monster : MonoBehaviour
     public void Death()
     {
         _buffslot.SlotInit();
-        MonsterObjectPool monsterPool = (MonsterObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.MONSTER];
+        //MonsterObjectPool monsterPool = (MonsterObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.MONSTER];
+        MonsterObjectPool monsterPool = (MonsterObjectPool)GameManager.instance.objectPoolManager.
+            m_pools[(int)ObjectPoolManager.E_POOL_TYPE.MONSTER];
         if (!_isBoss)
         {
             if(_guiStatusBar)
@@ -155,7 +157,7 @@ public class Monster : MonoBehaviour
                 monsterPool.GetPool(MonsterObjectPool.E_MONSTER_TYPE.GUI_HA_BAR).ReturnObject(_guiStatusBar.gameObject);
             }
         }
-        transform.position = Spawner._instance.transform.position;
+        transform.position = GameManager.instance.spawner.transform.position;
         monsterPool.GetPool(type).ReturnObject(gameObject);
     }
     public void InitMonster()
@@ -169,15 +171,19 @@ public class Monster : MonoBehaviour
 
         if (!_isBoss)
         {
-            MonsterObjectPool monsterPool = (MonsterObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.MONSTER];
-            GameObject hpBar = monsterPool.GetPool(MonsterObjectPool.E_MONSTER_TYPE.GUI_HA_BAR).GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+            //MonsterObjectPool monsterPool = (MonsterObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.MONSTER];
+            MonsterObjectPool monsterPool = (MonsterObjectPool)GameManager.instance.objectPoolManager.
+                m_pools[(int)ObjectPoolManager.E_POOL_TYPE.MONSTER];
+            //GameObject hpBar = monsterPool.GetPool(MonsterObjectPool.E_MONSTER_TYPE.GUI_HA_BAR).GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+            GameObject hpBar = monsterPool.GetPool(MonsterObjectPool.E_MONSTER_TYPE.GUI_HA_BAR).GetObject(
+                GameManager.instance.objectPoolManager.trsDynamicObjects);
             _guiStatusBar = hpBar.GetComponent<GUI_StatusBar>();
             _guiStatusBar.SetTarget(_pos_dmgEffect);
             _guiStatusBar.SetState(_HP, _maxHP);
         }
 
         _buffslot.SlotInit();
-        transform.position = Spawner._instance.transform.position;
+        transform.position = GameManager.instance.spawner.transform.position;
     }
 
     private void Awake()

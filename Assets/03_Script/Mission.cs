@@ -68,10 +68,11 @@ public class Mission : MonoBehaviour
 
     void Reward()
     {
-        switch(_rewardType)
+        CouponManager coupon = GameManager.instance.couponManager;
+        switch (_rewardType)
         {
             case E_MISSION_REWARD.GOLD:
-                Player._instance.AddGold(_rewardCount);
+                GameManager.instance.player.AddGold(_rewardCount);
                 //이펙트 필요
                 break;
             case E_MISSION_REWARD.MAGIC:
@@ -79,18 +80,18 @@ public class Mission : MonoBehaviour
                 break;
             case E_MISSION_REWARD.RARE:
                 //이펙트 필요
-                CouponManager._instance.GainCoupon(UnitManager.E_Rank.RARE);
+                coupon.GainCoupon(UnitManager.E_Rank.RARE);
                 break;
             case E_MISSION_REWARD.UNIQUE:
                 //이펙트 필요
-                CouponManager._instance.GainCoupon(UnitManager.E_Rank.UNIQUE);
+                coupon.GainCoupon(UnitManager.E_Rank.UNIQUE);
                 break;
             case E_MISSION_REWARD.EPIC:
                 //이펙트 필요
-                CouponManager._instance.GainCoupon(UnitManager.E_Rank.EPIC);
+                coupon.GainCoupon(UnitManager.E_Rank.EPIC);
                 break;
         }
-        MissionManager._instance.PlayMissionCompleteAudio();
+        GameManager.instance.missionManager.PlayMissionCompleteAudio();
     }
 
     private void Update()

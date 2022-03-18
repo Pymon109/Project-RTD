@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class SkillManager : MonoBehaviour
 {
-    static SkillManager _unique;
-    public static SkillManager _instance { get { return _unique; } }
-
     public enum E_SKILL_TRIGGER
     {
         NONE = 0,
@@ -34,10 +31,5 @@ public class SkillManager : MonoBehaviour
     {
         for (int i = 0; i < _roundSkills.Count; i++)
             _roundSkills[i].CheckAndCastOn();
-    }
-
-    private void Awake()
-    {
-        _unique = this;
     }
 }

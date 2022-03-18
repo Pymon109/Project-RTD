@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CouponManager : MonoBehaviour
 {
-    static CouponManager _unique;
-    public static CouponManager _instance { get { return _unique; } }
-
     [SerializeField]
     int[] _couponCount = new int[5];
     public void ReduceCouponCount(int rank)
@@ -46,14 +43,14 @@ public class CouponManager : MonoBehaviour
     }
     public void ButtonOnCancel()
     {
-        TileControl._instance.SwitchCouponMode(false);
+        GameManager.instance.tileManager.SwitchCouponMode(false);
     }
     public void UseCoupon(UnitManager.E_Rank rank)
     {
         //Debug.Log("UseCoupon "+ rank);
         if(_couponCount[(int)rank]>0)
         {
-            TileControl._instance.SwitchCouponMode(true);
+            GameManager.instance.tileManager.SwitchCouponMode(true);
             _gui_couponUnitCard.SetElement(rank);
         }
             
@@ -79,7 +76,6 @@ public class CouponManager : MonoBehaviour
 
     private void Awake()
     {
-        _unique = this;
         _gui_unitCoupon = GetComponent<GUI_UnitCoupon>();
     }
 

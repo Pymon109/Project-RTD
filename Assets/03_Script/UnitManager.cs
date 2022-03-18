@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class UnitManager : MonoBehaviour
 {
-    static UnitManager _unique;
-    public static UnitManager _instance { get { return _unique; } }
-
     [SerializeField]
     SkillManager _skill_manager;
 
@@ -77,11 +74,6 @@ public class UnitManager : MonoBehaviour
     public int CountOfThisUnit(int sid)
     {
         return _unitOnTile[sid / 100, sid % 100].Count;
-    }
-
-    private void Awake()
-    {
-        _unique = this;
     }
 
     private void Start()

@@ -12,7 +12,7 @@ public class ObjectPool : MonoBehaviour
         set 
         { 
             m_poolingObject = value;
-            m_poolingObject.transform.SetParent(ObjectPoolManager.instance.trsTemplete);
+            m_poolingObject.transform.SetParent(GameManager.instance.objectPoolManager.trsTemplete);
             m_poolingObject.SetActive(false);
         } 
     }

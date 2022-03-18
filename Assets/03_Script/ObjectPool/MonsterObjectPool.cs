@@ -26,7 +26,8 @@ public class MonsterObjectPool : ObjectPoolSubMaster
             ObjectPool pool = transform.GetChild(i).GetComponent<ObjectPool>();
             m_pools.Add(pool.gameObject.name, pool);
             m_keys.Add(pool.gameObject.name);
-            pool.InitQueu(Spawner._instance.transform.position);
+            pool.InitQueu(GameManager.instance.spawner.transform.position);
         }
+        m_bPoolReady = true;
     }
 }

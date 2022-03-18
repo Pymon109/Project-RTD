@@ -21,13 +21,13 @@ public class CountCondition_Unit : CountCondition
         switch(_targetSet)
         {
             case E_UNIT_SET_CONDITION.NONE:
-                count = UnitManager._instance.CountOfAllUnit(_taregtRank);
+                count = GameManager.instance.unitManager.CountOfAllUnit(_taregtRank);
                 break;
             case E_UNIT_SET_CONDITION.SAME:
-                count = UnitManager._instance.MaxCountOfSameUnit(_taregtRank);
+                count = GameManager.instance.unitManager.MaxCountOfSameUnit(_taregtRank);
                 break;
             case E_UNIT_SET_CONDITION.DIFFRENT:
-                count = UnitManager._instance.CountOfDifferentUnit(_taregtRank);
+                count = GameManager.instance.unitManager.CountOfDifferentUnit(_taregtRank);
                 break;
         }
         return count;

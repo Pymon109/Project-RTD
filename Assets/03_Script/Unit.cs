@@ -26,7 +26,7 @@ public class Unit : MonoBehaviour
     [SerializeField] int _additional_ATK;
     int GetDmg()
     {
-        int dmg = (int)((_ATK * (1 + _ExtraATK_rate)) + TeamManager._instance.GetLevel(_team) * _additional_ATK);
+        int dmg = (int)((_ATK * (1 + _ExtraATK_rate)) + GameManager.instance.teamManager.GetLevel(_team) * _additional_ATK);
 
         int criticalHitNext = Random.RandomRange(0, 100);
         if(criticalHitNext <= (_criticalHitChanceRate + _ExtraCriticalHitChanceRate) * 100)
@@ -178,7 +178,7 @@ public class Unit : MonoBehaviour
 
     public void DeleteThisUnit()
     {
-        TeamManager._instance.DeleteUnit(_team, _rank);
+        GameManager.instance.teamManager.DeleteUnit(_team, _rank);
         for (int i = 0; i < _skills.Length; i++)
         {
             if (_skills[i])
@@ -187,11 +187,13 @@ public class Unit : MonoBehaviour
                 {
                     int index = _skills[i].GetIndex();
                     if (index >= 0)
-                        SkillManager._instance.DeleteRoundSkill(_skills[i]);
+                        GameManager.instance.skillManager.DeleteRoundSkill(_skills[i]);
                 }
             }
         }
-        UnitObjectPool unitPool = (UnitObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.UNIT];
+        //UnitObjectPool unitPool = (UnitObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.UNIT];
+        UnitObjectPool unitPool = (UnitObjectPool)GameManager.instance.objectPoolManager.
+            m_pools[(int)ObjectPoolManager.E_POOL_TYPE.UNIT];
         unitPool.GetPool(_sid).ReturnObject(gameObject);
         //Destroy(this.gameObject);
     }
@@ -259,13 +261,13 @@ public class Unit : MonoBehaviour
                             break;
                         case E_ATTACK_TYPE.GUN:
                             targetMonster.Hit((int)GetDmg(), _property);
-                            EffectManager._instance.CreateGunEffect(_target.transform.position, _sid % 100);
+                            GameManager.instance.effectManager.CreateGunEffect(_target.transform.position, _sid % 100);
                             _sounds.PlayNormalAttackAudio(E_ATTACK_TYPE.GUN);
                             break;
                         case E_ATTACK_TYPE.RANGED:
                             Vector3 startPos = transform.position;
                             startPos.y += 5;
-                            EffectManager._instance.CreateTrackingAttackEffect(startPos, _sid % 100,
+                            GameManager.instance.effectManager.CreateTrackingAttackEffect(startPos, _sid % 100,
                                 (int)GetDmg(), _property, _target.GetComponent<Monster>());
                             _sounds.PlayNormalAttackAudio(E_ATTACK_TYPE.RANGED);
                             break;
@@ -349,7 +351,7 @@ public class Unit : MonoBehaviour
 
     void LookUpTarget()
     {
-        if(RoundManager._instance.GetCurrentState() == RoundManager.E_ROUND_STATE.PLAY)
+        if(GameManager.instance.roundManager.GetCurrentState() == RoundManager.E_ROUND_STATE.PLAY)
         {
             if (_target)
             {
@@ -387,7 +389,7 @@ public class Unit : MonoBehaviour
         {
             if (_skills[i])
                 if (_skills[i].GetTriggerType() == SkillManager.E_SKILL_TRIGGER.ROUND)
-                    SkillManager._instance.AddRoundSkillr(_skills[i]);
+                    GameManager.instance.skillManager.AddRoundSkillr(_skills[i]);
         }
     }
 

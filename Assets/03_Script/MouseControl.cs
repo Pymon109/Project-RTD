@@ -38,24 +38,24 @@ public class MouseControl : MonoBehaviour
                             //Debug.Log("detect monster : " + hit.collider.name);
                             _gui_bottomBar.SetTargetMonster(hit);
 
-                            TileControl._instance.ReleaseTargetTile();
+                            GameManager.instance.tileManager.ReleaseTargetTile();
                         }
                         else if (Physics.Raycast(ray, out hit, 1000.0f, 1 << LayerMask.NameToLayer("GoldMonster")))
                         {
                             //Debug.Log("detect monster : " + hit.collider.name);
                             _gui_bottomBar.SetTargetMonster(hit);
 
-                            TileControl._instance.ReleaseTargetTile();
+                            GameManager.instance.tileManager.ReleaseTargetTile();
                         }
                         else if (Physics.Raycast(ray, out hit, 1000.0f, 1 << LayerMask.NameToLayer("Tile")))
                         {
                             //Debug.Log("detect tile : " + hit.collider.name);
-                            TileControl._instance.SetTargetTile(hit);
+                            GameManager.instance.tileManager.SetTargetTile(hit);
                             _gui_bottomBar.SetTargetUnit(hit);
                         }
                         else
                         {
-                            TileControl._instance.ReleaseTargetTile();
+                            GameManager.instance.tileManager.ReleaseTargetTile();
                             _gui_bottomBar.SetState(GUI_BottomBar.E_BOTTOMBAR_STATE.NONE);
                             GUI_ToolTipControl._instance.SetToolTip(GUI_ToolTipControl.E_GUI_TOOLTIP.NONE);
                         }
@@ -88,24 +88,24 @@ public class MouseControl : MonoBehaviour
                     //Debug.Log("detect monster : " + hit.collider.name);
                     _gui_bottomBar.SetTargetMonster(hit);
 
-                    TileControl._instance.ReleaseTargetTile();
+                    GameManager.instance.tileManager.ReleaseTargetTile();
                 }
                 else if (Physics.Raycast(ray, out hit, 1000.0f, 1 << LayerMask.NameToLayer("GoldMonster")))
                 {
                     //Debug.Log("detect monster : " + hit.collider.name);
                     _gui_bottomBar.SetTargetMonster(hit);
 
-                    TileControl._instance.ReleaseTargetTile();
+                    GameManager.instance.tileManager.ReleaseTargetTile();
                 }
                 else if (Physics.Raycast(ray, out hit, 1000.0f, 1 << LayerMask.NameToLayer("Tile")))
                 {
                     //Debug.Log("detect tile : " + hit.collider.name);
-                    TileControl._instance.SetTargetTile(hit);
+                    GameManager.instance.tileManager.SetTargetTile(hit);
                     _gui_bottomBar.SetTargetUnit(hit);
                 }
                 else
                 {
-                    TileControl._instance.ReleaseTargetTile();
+                    GameManager.instance.tileManager.ReleaseTargetTile();
                     _gui_bottomBar.SetState(GUI_BottomBar.E_BOTTOMBAR_STATE.NONE);
                     GUI_ToolTipControl._instance.SetToolTip(GUI_ToolTipControl.E_GUI_TOOLTIP.NONE);
                 }

@@ -16,8 +16,8 @@ public class GUI_ActiveUI_btn : MonoBehaviour
     {
         _IsActive ^= true;
         _target.SetActive(_IsActive);
-        CouponManager._instance.UpdateCouponGUI();
-        TeamManager._instance.UpdateTeamCardGUI();
+        GameManager.instance.couponManager.UpdateCouponGUI();
+        GameManager.instance.teamManager.UpdateTeamCardGUI();
     }
 
     private void Awake()

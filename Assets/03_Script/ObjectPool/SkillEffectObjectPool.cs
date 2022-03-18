@@ -56,5 +56,6 @@ public class SkillEffectObjectPool : ObjectPoolSubMaster
             m_keys.Add(pool.prefabName);
             pool.InitQueu();
         }
+        m_bPoolReady = true;
     }
 }

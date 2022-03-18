@@ -6,18 +6,21 @@ public class UnitBuilder : Builder
 {
     public GameObject BuildUnit(int sid, Vector3 position, Quaternion rotation)
     {
-        //데이터 가져오기
-        UnitData.s_unitInfo unitInfo = DataManager._instance.GetUnitInfo(sid);
-        //프리팹 가져오기, 복사
-        GameObject prefabFram = Resources.Load<GameObject>("Prefabs/UnitResource/UnitFrame");
-        GameObject newFram = Instantiate(prefabFram, position, prefabFram.transform.rotation);
-        //모델링 가져오기
         string unitID = "u";
         if (sid < 10)
             unitID += "00";
         else if (sid < 100)
             unitID += "0";
         unitID += sid.ToString();
+
+        //데이터 가져오기
+        //UnitData.s_unitInfo unitInfo = GameManager.instance.dataManager.GetUnitInfo(sid);
+        UnitData.s_unitInfo unitInfo = GameManager.instance.fileManager.GetUnitInfo(unitID);
+
+        //프리팹 가져오기, 복사
+        GameObject prefabFram = Resources.Load<GameObject>("Prefabs/UnitResource/UnitFrame");
+        GameObject newFram = Instantiate(prefabFram, position, prefabFram.transform.rotation);
+        //모델링 가져오기
 
         GameObject prefabModeling = Resources.Load<GameObject>("Prefabs/UnitResource/Modeling/Modeling_unit_" + unitID);
         GameObject newModeling = Instantiate(prefabModeling, newFram.transform.position, prefabModeling.transform.rotation);
@@ -126,7 +129,8 @@ public class UnitBuilder : Builder
         unit.SetBuffDebuffSlot(slot);
 
         //스킬 빌더 호출
-        SkillBuilder skillBuilder = (SkillBuilder)DataManager._instance.GetBuilder(DataManager.E_DATATYPE.SKILLDATA);
+        //SkillBuilder skillBuilder = (SkillBuilder)DataManager._instance.GetBuilder(DataManager.E_DATATYPE.SKILLDATA);
+        SkillBuilder skillBuilder = (SkillBuilder)GameManager.instance.dataManager.GetBuilder(DataManager.E_DATATYPE.SKILLDATA);
         GameObject g_skill01, g_skill02 = null;
         Transform skillParent = newFram.transform.Find("Skills");
         g_skill01 = skillBuilder.BuildSkill(unitInfo._skill01, unit);
@@ -271,7 +275,8 @@ public class UnitBuilder : Builder
         unit.SetBuffDebuffSlot(slot);
 
         //스킬 빌더 호출
-        SkillBuilder skillBuilder = (SkillBuilder)DataManager._instance.GetBuilder(DataManager.E_DATATYPE.SKILLDATA);
+        //SkillBuilder skillBuilder = (SkillBuilder)DataManager._instance.GetBuilder(DataManager.E_DATATYPE.SKILLDATA);
+        SkillBuilder skillBuilder = (SkillBuilder)GameManager.instance.dataManager.GetBuilder(DataManager.E_DATATYPE.SKILLDATA);
         GameObject g_skill01, g_skill02 = null;
         Transform skillParent = newFram.transform.Find("Skills");
         g_skill01 = skillBuilder.BuildSkill(unitInfo._skill01, unit);

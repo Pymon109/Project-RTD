@@ -52,7 +52,7 @@ public class AreaOfEffect : MonoBehaviour
             {
                 for (int i = 0; i < _targets.Count; i++)
                 {
-                    int realDMG = (int)(_damage * (1 + TeamManager._instance.GetLevel(_team) * 0.1));
+                    int realDMG = (int)(_damage * (1 + GameManager.instance.teamManager.GetLevel(_team) * 0.1));
                     Monster targetMonster = _targets[i].GetComponent<Monster>();
                     if (_property.IsSameProperty(targetMonster.GetProperty()))
                     {

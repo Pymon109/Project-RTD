@@ -20,7 +20,7 @@ public class BossMonster_Divide : Monster
         {
             for(int i = 0; i < 2; i++)
             {
-                GameObject newDivideMonster = Spawner._instance.SpawnMonster(_divideMonster, _level);
+                GameObject newDivideMonster = GameManager.instance.spawner.SpawnMonster(_divideMonster, _level);
                 newDivideMonster.transform.position = transform.position;
                 newDivideMonster.transform.rotation = transform.rotation;
                 newDivideMonster.GetComponent<MonsterAI>().SetTargetPathIdx(GetComponent<MonsterAI>().GetTargetPathIdx());

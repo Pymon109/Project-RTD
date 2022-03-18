@@ -9,7 +9,7 @@ public class SkillWork_Gold : SkillWork
 
     override public void Casting()
     {
-        Player._instance.AddGold(_gold);
+        GameManager.instance.player.AddGold(_gold);
     }
 
     private void Awake()

@@ -34,7 +34,9 @@ public class TextEffect : MonoBehaviour
     void DestroyText()
     {
         //Destroy(gameObject);
-        EffectObjectPool effectPool = (EffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
+        //EffectObjectPool effectPool = (EffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
+        EffectObjectPool effectPool = (EffectObjectPool)GameManager.instance.objectPoolManager.
+            m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
         effectPool.GetPool(EffectObjectPool.E_EFFECT_TYPE.TEXT).ReturnObject(gameObject);
     }
 

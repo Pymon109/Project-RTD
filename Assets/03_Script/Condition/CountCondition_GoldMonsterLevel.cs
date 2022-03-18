@@ -6,7 +6,7 @@ public class CountCondition_GoldMonsterLevel : CountCondition
 {
     public override int CurrentCount()
     {
-        return GoldMonsterManager._instance.GetNextLevel() - 1;
+        return GameManager.instance.goldMonsterManaer.GetNextLevel() - 1;
     }
 
     private void Start()

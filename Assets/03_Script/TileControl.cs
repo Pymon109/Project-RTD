@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TileControl : MonoBehaviour
 {
-    static TileControl _unique;
-    public static TileControl _instance { get { return _unique; } }
+/*    static TileControl _unique;
+    public static TileControl _instance { get { return _unique; } }*/
 
     public MouseControl m_mouseCon; 
     public List<Tile> _list_tiles;
@@ -41,7 +41,7 @@ public class TileControl : MonoBehaviour
                 if (_couponTarget)
                     _couponTarget.SetTileState(Tile.E_TileState.NONE);
                 _couponTarget = null;
-                CouponManager._instance.SwitchCouponUnitCard(false, Vector3.zero);
+                GameManager.instance.couponManager.SwitchCouponUnitCard(false, Vector3.zero);
                 break;
         }
         _isCouponMod = command;
@@ -59,7 +59,7 @@ public class TileControl : MonoBehaviour
                 //해당 자리에 유닛 선택 카드 열기
                 Vector3 pos = hit.transform.position;
                 pos.y = 50;
-                CouponManager._instance.SwitchCouponUnitCard(true, pos);
+                GameManager.instance.couponManager.SwitchCouponUnitCard(true, pos);
                 //유닛 카드 데이터 뿌리기
 
                 //다른 유닛 이펙트 끄기
@@ -104,7 +104,7 @@ public class TileControl : MonoBehaviour
                 _sameUnitTile = null;
                 return false;
             }
-            int sameUnitIDX = UnitManager._instance.FindSameUnit(targetUnit.GetSID(), int.Parse(_target.gameObject.name));
+            int sameUnitIDX = GameManager.instance.unitManager.FindSameUnit(targetUnit.GetSID(), int.Parse(_target.gameObject.name));
             if (sameUnitIDX >= 0)
             {
                 _sameUnitTile = _list_tiles[sameUnitIDX];
@@ -190,7 +190,7 @@ public class TileControl : MonoBehaviour
         }
         else if (_target.GetTileState() == Tile.E_TileState.NONE)
         {
-            if (Player._instance.SpendGold(100))
+            if (GameManager.instance.player.SpendGold(100))
             {
                 _target.CreateUnit();
                 _target.SetMergeble();
@@ -200,7 +200,7 @@ public class TileControl : MonoBehaviour
 
     private void Awake()
     {
-        _unique = this;
+        //_unique = this;
         for (int i = 0; i < transform.childCount; i++)
             _list_tiles.Add(transform.GetChild(i).gameObject.GetComponent<Tile>());
     }

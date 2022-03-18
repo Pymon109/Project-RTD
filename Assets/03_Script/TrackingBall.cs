@@ -51,7 +51,7 @@ public class TrackingBall : MonoBehaviour
                 Vector3 explosionPos = transform.position;
                 explosionPos.y += 5;
                 //EffectManager._instance.CreateEffect(explosionPos, _prefabExplosionEffect.name);
-                EffectManager._instance.CreateExplodeEffect(explosionPos, m_iUnitNum);
+                GameManager.instance.effectManager.CreateExplodeEffect(explosionPos, m_iUnitNum);
                 _target.Hit(_damage, _property);
                 gameObject.SetActive(false);
             }

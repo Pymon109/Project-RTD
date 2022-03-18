@@ -9,7 +9,7 @@ public class SkillWork_HP : SkillWork
 
     override public void Casting()
     {
-        Player._instance.AddHP(_hp);
+        GameManager.instance.player.AddHP(_hp);
     }
 
     private void Awake()

@@ -9,7 +9,7 @@ public class GUI_CreateUnitButton : MonoBehaviour
 
     void SetButton()
     {
-        if (TileControl._instance.isTargetSet)
+        if (GameManager.instance.tileManager.isTargetSet)
             m_txtFunction.text = "MERGE\nUNIT";
         else
             m_txtFunction.text = "CREATE\nUNIT";

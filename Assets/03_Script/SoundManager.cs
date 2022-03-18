@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    static SoundManager _unique;
-    public static SoundManager _instance { get { return _unique; } }
-
     [SerializeField]
     AudioSource _audio_BGM;
 
@@ -19,11 +16,6 @@ public class SoundManager : MonoBehaviour
         _audio_BGM.volume = 0.25f;
         _audio_BGM.loop = true;
         _audio_BGM.Play();
-    }
-
-    private void Awake()
-    {
-        _unique = this;
     }
 
     private void Start()

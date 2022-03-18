@@ -95,7 +95,7 @@ public class SkillWork : MonoBehaviour
 
                 break;
             case E_TARGET_TYPE.PLAYER:
-                _target = Player._instance.gameObject;
+                _target = GameManager.instance.player.gameObject;
                 break;
             case E_TARGET_TYPE.NONE:
 

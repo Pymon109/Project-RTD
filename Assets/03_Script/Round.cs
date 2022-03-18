@@ -42,7 +42,7 @@ public class Round : MonoBehaviour
         for (int i = 0; i < _monsterCount; i++)
         {
             //Spawner._instance.SpawnMonster(_spawnMonster, _round);
-            Spawner._instance.SpawnMonster(m_property, _round);
+            GameManager.instance.spawner.SpawnMonster(m_property, _round);
 
             yield return new WaitForSeconds(0.5f);
         }
@@ -57,7 +57,7 @@ public class Round : MonoBehaviour
         {
             if(!_isSpawnning)
             {
-                Player._instance.AddGold(_rewardGold);
+                GameManager.instance.player.AddGold(_rewardGold);
                 return true;
             }
         }

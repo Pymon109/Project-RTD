@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class TeamManager : MonoBehaviour
 {
-    static TeamManager _unique;
-    public static TeamManager _instance { get { return _unique; } }
-
     [SerializeField]
     List<GUI_TeamCard> _list_teamCard;
 
@@ -32,12 +29,13 @@ public class TeamManager : MonoBehaviour
 
     void IncreaseLevel(E_TEAM team)
     {
-        if(Player._instance.SpendGold(GetDemendGold(team)))
+        if(GameManager.instance.player.SpendGold(GetDemendGold(team)))
         {
             _list_teamCard[(int)team].SetLevel(++_level[(int)team]);
             _list_teamCard[(int)team].SetGold(GetDemendGold(team));
             _audio_upgrade.Play();
-            List<CountCondition> conditionList = MissionManager._instance.GetCondition(CountCondition.E_COUNT_CONDITION_TYPE.UPGRADE);
+            List<CountCondition> conditionList = GameManager.instance.missionManager.
+                GetCondition(CountCondition.E_COUNT_CONDITION_TYPE.UPGRADE);
            // Debug.Log("conditionList's count = " + conditionList.Count);
             for (int i = 0; i < conditionList.Count; i++)
             {
@@ -76,11 +74,6 @@ public class TeamManager : MonoBehaviour
                 count[i] = _rankCount[team, i];
             _list_teamCard[team].InitUnitCount(count);
         }
-    }
-
-    private void Awake()
-    {
-        _unique = this;
     }
 
     private void Start()

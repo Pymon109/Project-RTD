@@ -39,7 +39,7 @@ public class SkillWork_BuffDebuff : SkillWork
                         break;
                 }
                 pos.y = 10;
-                EffectManager._instance.CreateSkillEffect(pos, skillID + "_buff");
+                GameManager.instance.effectManager.CreateSkillEffect(pos, skillID + "_buff");
                 buffDebuffSlot.AddBuffDebuff(instance.GetComponent<Buff>());
             }
         }

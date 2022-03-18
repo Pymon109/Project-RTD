@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class RoundManager : MonoBehaviour
 {
-    static RoundManager _unique;
-    public static RoundManager _instance { get { return _unique; } }
-
     [SerializeField]
     GUI_RoundInfo _gui_roundInfo;
 
@@ -38,7 +35,7 @@ public class RoundManager : MonoBehaviour
         switch (_currentState)
         {
             case E_ROUND_STATE.DISABLE:
-                if (DataManager._instance.IsLoadData(DataManager.E_DATATYPE.ROUND))
+                if (GameManager.instance.fileManager.bFileDone)
                     SetRoundState(E_ROUND_STATE.BIULDING);
                 break;
             case E_ROUND_STATE.BIULDING:
@@ -49,7 +46,7 @@ public class RoundManager : MonoBehaviour
                 if(_list_round[_currentRound].ProcessFindTarget("Monster"))
                 {
                     SetRoundState(E_ROUND_STATE.COMPLETE);
-                    Spawner._instance.SetState(Spawner.E_SPAWNER_STATE.SPAWN_END);
+                    GameManager.instance.spawner.SetState(Spawner.E_SPAWNER_STATE.SPAWN_END);
                 }
                 break;
             case E_ROUND_STATE.COMPLETE:
@@ -82,13 +79,14 @@ public class RoundManager : MonoBehaviour
                 else
                     _gui_roundInfo.SetState(GUI_RoundInfo.E_GUI_ROUND_INFO_STATE.PLAY_NR);
                 StartCoroutine(_list_round[_currentRound].SpawnMonster());
-                SkillManager._instance.RoundSkillCastOn();
+                GameManager.instance.skillManager.RoundSkillCastOn();
                 break;
             case E_ROUND_STATE.COMPLETE:
                 _currentRound++;
                 if (_currentRound >= _list_round.Count)
                 {
-                    GUIManager._instance.SetState(GUIManager.E_GUI_STATE.PLAY);
+                    //GUIManager._instance.SetState(GUIManager.E_GUI_STATE.PLAY);
+                    GameManager.instance.guiManager.SetState(GUIManager.E_GUI_STATE.PLAY);
                     SetRoundState(E_ROUND_STATE.END);
                 }
                 else
@@ -98,7 +96,8 @@ public class RoundManager : MonoBehaviour
                 }
                 break;
             case E_ROUND_STATE.END:
-                GUIManager._instance.SetState(GUIManager.E_GUI_STATE.CLEAR);
+                //GUIManager._instance.SetState(GUIManager.E_GUI_STATE.CLEAR);
+                GameManager.instance.guiManager.SetState(GUIManager.E_GUI_STATE.CLEAR);
                 break;
         }
         _currentState = command;
@@ -112,7 +111,7 @@ public class RoundManager : MonoBehaviour
             _list_round[_currentRound].ReduceWaitinTime();
             _gui_roundInfo.SetWaitingTime((int)_list_round[_currentRound].GetWaitingTime());
             if (_list_round[_currentRound].GetWaitingTime() == 2)
-                Spawner._instance.SetState(Spawner.E_SPAWNER_STATE.SPAWNING);
+                GameManager.instance.spawner.SetState(Spawner.E_SPAWNER_STATE.SPAWNING);
                 
         }
         SetRoundState(E_ROUND_STATE.PLAY);
@@ -120,7 +119,9 @@ public class RoundManager : MonoBehaviour
 
     void BuildAllRound()
     {
-        RoundBuilder roundBuilder = (RoundBuilder)(DataManager._instance.GetBuilder(DataManager.E_DATATYPE.ROUND));
+        //RoundBuilder roundBuilder = (RoundBuilder)(DataManager._instance.GetBuilder(DataManager.E_DATATYPE.ROUND));
+        RoundBuilder roundBuilder = (RoundBuilder)(GameManager.instance.dataManager.
+            GetBuilder(DataManager.E_DATATYPE.ROUND));
 
         for (int i = 1; i <= 40; i++)
         {
@@ -138,11 +139,6 @@ public class RoundManager : MonoBehaviour
                 _list_round.Add(g_round40.GetComponent<Round>());*/
 
         SetRoundState(E_ROUND_STATE.WAIT);
-    }
-
-    private void Awake()
-    {
-        _unique = this;
     }
 
     private void Update()

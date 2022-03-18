@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    static Spawner _unique;
-    public static Spawner _instance { get { return _unique; } }
-
     [SerializeField] GameObject _path;
     public GameObject GetAllPath() { return _path; }
 
@@ -36,8 +33,12 @@ public class Spawner : MonoBehaviour
 
     public GameObject SpawnMonster(MonsterObjectPool.E_MONSTER_TYPE property, int level)
     {
-        MonsterObjectPool monsterPool = (MonsterObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.MONSTER];
-        GameObject poolMonster = monsterPool.GetPool(property).GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        //MonsterObjectPool monsterPool = (MonsterObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.MONSTER];
+        MonsterObjectPool monsterPool = (MonsterObjectPool)GameManager.instance.objectPoolManager.
+            m_pools[(int)ObjectPoolManager.E_POOL_TYPE.MONSTER];
+        //GameObject poolMonster = monsterPool.GetPool(property).GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        GameObject poolMonster = monsterPool.GetPool(property).GetObject(
+            GameManager.instance.objectPoolManager.trsDynamicObjects);
 
         poolMonster.transform.position = transform.position;
         poolMonster.GetComponent<MonsterAI>().SetPath(_path);
@@ -59,8 +60,10 @@ public class Spawner : MonoBehaviour
         {
             _gui_goldMonsterButton.ButtonSetActive(false);
             _isCoolTimeDown_goldMonster = false;
-            SpawnMonster(MonsterObjectPool.E_MONSTER_TYPE.GOLD_MONSTER, GoldMonsterManager._instance.GetNextLevel());
-            List<CountCondition> conditionList = MissionManager._instance.GetCondition(CountCondition.E_COUNT_CONDITION_TYPE.SPAWN_GOLDMONSTER);
+            SpawnMonster(MonsterObjectPool.E_MONSTER_TYPE.GOLD_MONSTER,
+                GameManager.instance.goldMonsterManaer.GetNextLevel());
+            List<CountCondition> conditionList = GameManager.instance.missionManager.
+                GetCondition(CountCondition.E_COUNT_CONDITION_TYPE.SPAWN_GOLDMONSTER);
             for (int i = 0; i < conditionList.Count; i++)
             {
                 conditionList[i].AddCount(1);
@@ -137,11 +140,6 @@ public class Spawner : MonoBehaviour
     public void ButtonOnGoldMonster()
     {
         StartCoroutine(GoldMonsterProcess());
-    }
-
-    private void Awake()
-    {
-        _unique = this;
     }
 
     private void Update()

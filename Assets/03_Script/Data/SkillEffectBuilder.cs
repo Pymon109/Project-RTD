@@ -7,8 +7,8 @@ public class SkillEffectBuilder : Builder
     public GameObject BuildSkillEffect(string skillEffectID, Unit parentUnit)
     {
         //데이터 가져오기
-        SkillEffectData.s_skillEffectInfo skillEffectInfo = DataManager._instance.GetSkillEffectInfo(skillEffectID);
-
+        //SkillEffectData.s_skillEffectInfo skillEffectInfo = GameManager.instance.dataManager.GetSkillEffectInfo(skillEffectID);
+        SkillEffectData.s_skillEffectInfo skillEffectInfo = GameManager.instance.fileManager.GetSkillEffectInfo(skillEffectID);
 
         GameObject newEffect = new GameObject(skillEffectInfo._effectID);
 

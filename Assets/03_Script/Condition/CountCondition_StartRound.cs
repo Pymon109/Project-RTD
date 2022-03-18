@@ -6,7 +6,7 @@ public class CountCondition_StartRound : CountCondition
 {
     public override int CurrentCount()
     {
-        return RoundManager._instance.GetCurrentRound() + 1;
+        return GameManager.instance.roundManager.GetCurrentRound() + 1;
     }
 
     private void Start()

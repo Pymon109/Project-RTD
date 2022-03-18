@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    static DataManager _unique;
-    public static DataManager _instance { get { return _unique; } }
+/*    static DataManager _unique;
+    public static DataManager _instance { get { return _unique; } }*/
 
     public enum E_DATATYPE
     {
@@ -34,11 +34,11 @@ public class DataManager : MonoBehaviour
     List<Builder> _builders = new List<Builder>();
     public Builder GetBuilder(E_DATATYPE type) { return _builders[(int)type]; }
 
-    List<Hashtable> _tables = new List<Hashtable>();
+    //List<Hashtable> _tables = new List<Hashtable>();
 
     [SerializeField]
     int TestUnitBuild;
-    public UnitData.s_unitInfo GetUnitInfo(int sid)
+    /*public UnitData.s_unitInfo GetUnitInfo(int sid)
     {
         string unitID = "u";
         if (sid < 10)
@@ -62,13 +62,13 @@ public class DataManager : MonoBehaviour
     public RoundData.s_roundInfo GetRoundDataInfo(string roundID)
     {
         return (RoundData.s_roundInfo)_tables[(int)E_DATATYPE.ROUND][roundID];
-    }
+    }*/
 
-    List<bool> _isLoadStart = new List<bool>();
+/*    List<bool> _isLoadStart = new List<bool>();
     List<bool> _isLoadData = new List<bool>();
-    public bool IsLoadData(E_DATATYPE type) { return _isLoadData[(int)type]; }
+    public bool IsLoadData(E_DATATYPE type) { return _isLoadData[(int)type]; }*/
 
-    void DataLoading(E_DATATYPE type)
+    /*void DataLoading(E_DATATYPE type)
     {
         int idx = (int)type;
         if (!_isLoadData[idx])
@@ -83,11 +83,11 @@ public class DataManager : MonoBehaviour
                 //테스트 코드 빌드
             }
         }
-    }
+    }*/
 
     void DebugLogData(E_DATATYPE type)
     {
-        int idx = (int)type;
+        /*int idx = (int)type;
         switch(type)
         {
             case E_DATATYPE.UNITDATA:
@@ -121,24 +121,24 @@ public class DataManager : MonoBehaviour
                     Debug.Log($"{nowKey}");
                 }
                 break;
-        }
+        }*/
     }
 
     private void Awake()
     {
-        _unique = this;
+        //_unique = this;
     }
 
     private void Start()
     {
-        for (int i = 0; i < _datas.Count; i++)
+/*        for (int i = 0; i < _datas.Count; i++)
         {
             _isLoadStart.Add(false);
             _isLoadData.Add(false);
             _tables.Add(new Hashtable());
             if (_datas[i])
                 _datas[i].SetSheetAdress(associatedSheet, associatedWorksheet[i]);
-        }
+        }*/
 
         //_datas[0].StartGetData();
     }
@@ -146,7 +146,7 @@ public class DataManager : MonoBehaviour
     bool m_bIsUnitPoolDone = false;
     private void Update()
     {
-        E_DATATYPE command = E_DATATYPE.WAIT;
+        /*E_DATATYPE command = E_DATATYPE.WAIT;
 
         if (!_isLoadData[(int)E_DATATYPE.UNITDATA])
             command = E_DATATYPE.UNITDATA;
@@ -163,7 +163,7 @@ public class DataManager : MonoBehaviour
             {
                 if(!m_bIsUnitPoolDone)
                 {
-                    UnitObjectPool unitPool = (UnitObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.UNIT];
+                    UnitObjectPool unitPool = (UnitObjectPool)GameManager.instance.objectPoolManager.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.UNIT];
                     Hashtable unitDataTable = _tables[(int)E_DATATYPE.UNITDATA];
                     foreach (DictionaryEntry entry in unitDataTable)
                     {
@@ -173,7 +173,7 @@ public class DataManager : MonoBehaviour
                     }
                     m_bIsUnitPoolDone = true;
                 }
-                GUIManager._instance.SetState(GUIManager.E_GUI_STATE.PLAY);
+                GameManager.instance.guiManager.SetState(GUIManager.E_GUI_STATE.PLAY);
                 _isDataLoadEnd = true;
             }
             return;
@@ -185,7 +185,6 @@ public class DataManager : MonoBehaviour
             _datas[(int)command].StartGetData();
         }
         else
-            DataLoading(command);
-
+            DataLoading(command);*/
     }
 }

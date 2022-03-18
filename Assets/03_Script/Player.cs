@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     int _idxDegugGUI;
 
-    static Player _unique;
-    public static Player _instance { get { return _unique; } }
+/*    static Player _unique;
+    public static Player _instance { get { return _unique; } }*/
 
     int _HP = 30;
     int _gold = 600;
@@ -30,13 +30,14 @@ public class Player : MonoBehaviour
     public void Hit(int dmg) 
     { 
         _HP -= dmg;
-        EffectManager._instance.CreateTextEffect(_effectPos_HP.position, "-" + dmg.ToString(), EffectManager.E_TEXT_EFFECT_TYPE.DMG_PLAYER);
+        GameManager.instance.effectManager.CreateTextEffect(_effectPos_HP.position, "-" + dmg.ToString(), EffectManager.E_TEXT_EFFECT_TYPE.DMG_PLAYER);
         _audio_loseHP.Play();
         if (_HP <=0)
         {
             //게임 오버
             Debug.Log("Game Over");
-            GUIManager._instance.SetState(GUIManager.E_GUI_STATE.GAMEOVER);
+            //GUIManager._instance.SetState(GUIManager.E_GUI_STATE.GAMEOVER);
+            GameManager.instance.guiManager.SetState(GUIManager.E_GUI_STATE.GAMEOVER);
         }
         _gui_topBar.SetHPTextP(_HP);
     }
@@ -46,7 +47,7 @@ public class Player : MonoBehaviour
         _HP += hp;
         if (_HP > 30)
             _HP = 30;
-        EffectManager._instance.CreateTextEffect(_effectPos_HP.position, "-" + hp.ToString(), EffectManager.E_TEXT_EFFECT_TYPE.TOPBAR_HP);
+        GameManager.instance.effectManager.CreateTextEffect(_effectPos_HP.position, "-" + hp.ToString(), EffectManager.E_TEXT_EFFECT_TYPE.TOPBAR_HP);
         _gui_topBar.SetHPTextP(_HP);
     }
 
@@ -57,7 +58,7 @@ public class Player : MonoBehaviour
         _gold += inGold;
         _gui_topBar.SetGoldText(_gold);
         _audio_gainGold.Play();
-        EffectManager._instance.CreateTextEffect(_effectPos_Gold.position, "+" + inGold.ToString(), EffectManager.E_TEXT_EFFECT_TYPE.TOPBAR_GOLD);
+        GameManager.instance.effectManager.CreateTextEffect(_effectPos_Gold.position, "+" + inGold.ToString(), EffectManager.E_TEXT_EFFECT_TYPE.TOPBAR_GOLD);
     }
     public bool SpendGold(int demand)
     {
@@ -65,7 +66,8 @@ public class Player : MonoBehaviour
         {
             _gold -= demand;
             _gui_topBar.SetGoldText(_gold);
-            List<CountCondition> conditionList =  MissionManager._instance.GetCondition(CountCondition.E_COUNT_CONDITION_TYPE.USE_GOLD);
+            List<CountCondition> conditionList = GameManager.instance.missionManager.
+                GetCondition(CountCondition.E_COUNT_CONDITION_TYPE.USE_GOLD);
             for(int i = 0; i < conditionList.Count; i++)
             {
                 conditionList[i].AddCount(demand);
@@ -77,7 +79,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        _unique = this;
+        //_unique = this;
     }
 
     private void Start()

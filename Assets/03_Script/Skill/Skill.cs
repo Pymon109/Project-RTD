@@ -165,7 +165,7 @@ public class Skill : MonoBehaviour
         _leftCoolTime = _coolTime;
         if(GetTriggerType() == SkillManager.E_SKILL_TRIGGER.ROUND)
         {
-            SkillManager._instance.AddRoundSkillr(this);
+            GameManager.instance.skillManager.AddRoundSkillr(this);
         }
     }
 

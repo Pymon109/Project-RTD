@@ -35,7 +35,7 @@ public class SkillWork_Damage : SkillWork
                 {
                     Vector3 pos = _targets[0].transform.position;
                     pos.y = 5;
-                    EffectManager._instance.CreateSkillEffect(pos, skill.GetSkillID());
+                    GameManager.instance.effectManager.CreateSkillEffect(pos, skill.GetSkillID());
                 }
                     
             }
@@ -44,7 +44,7 @@ public class SkillWork_Damage : SkillWork
                 count--;
                 for (int i = 0; i < _targets.Count; i++)
                 {
-                    int realDMG = (int)(_dmg_scalse * (1 + TeamManager._instance.GetLevel(_team) * 0.1));
+                    int realDMG = (int)(_dmg_scalse * (1 + GameManager.instance.teamManager.GetLevel(_team) * 0.1));
                     if(_targets[i])
                     {
                         Monster targetMonster = _targets[i].GetComponent<Monster>();

@@ -24,5 +24,6 @@ public class EffectObjectPool : ObjectPoolSubMaster
             m_keys.Add(pool.gameObject.name);
             pool.InitQueu();
         }
+        m_bPoolReady = true;
     }
 }

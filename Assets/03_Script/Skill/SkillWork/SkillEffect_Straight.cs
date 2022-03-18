@@ -49,7 +49,7 @@ public class SkillEffect_Straight : MonoBehaviour
             {
                 for(int i = 0; i < hit.Length; i++)
                 {
-                    int realDMG = (int)(_damage * (1 + TeamManager._instance.GetLevel(_team) * 0.1));
+                    int realDMG = (int)(_damage * (1 + GameManager.instance.teamManager.GetLevel(_team) * 0.1));
                     Monster target = hit[i].collider.gameObject.GetComponent<Monster>();
                     if(target)
                     {
@@ -67,7 +67,7 @@ public class SkillEffect_Straight : MonoBehaviour
             {
                 for (int i = 0; i < hit.Length; i++)
                 {
-                    int realDMG = (int)(_damage * (1 + TeamManager._instance.GetLevel(_team) * 0.1));
+                    int realDMG = (int)(_damage * (1 + GameManager.instance.teamManager.GetLevel(_team) * 0.1));
                     Monster target = hit[i].collider.gameObject.GetComponent<Monster>();
                     if (target)
                     {

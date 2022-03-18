@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class EffectManager : MonoBehaviour
 {
-    static EffectManager _unique;
-    public static EffectManager _instance { get { return _unique; } }
-
     [SerializeField]
     CameraShake _camerShake;
 
@@ -36,8 +33,12 @@ public class EffectManager : MonoBehaviour
     }
     public void CreateTextEffect(Vector3 pos, string text, E_TEXT_EFFECT_TYPE type)
     {
-        EffectObjectPool effectPool = (EffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
-        GameObject newobj = effectPool.GetPool(EffectObjectPool.E_EFFECT_TYPE.TEXT).GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        //EffectObjectPool effectPool = (EffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
+        EffectObjectPool effectPool = (EffectObjectPool)GameManager.instance.objectPoolManager
+            .m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
+        //GameObject newobj = effectPool.GetPool(EffectObjectPool.E_EFFECT_TYPE.TEXT).GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        GameObject newobj = effectPool.GetPool(EffectObjectPool.E_EFFECT_TYPE.TEXT).GetObject
+            (GameManager.instance.objectPoolManager.trsDynamicObjects);
         newobj.transform.position = pos;
 
         Color color;
@@ -88,8 +89,12 @@ public class EffectManager : MonoBehaviour
     }
     public void CreateTextEffect(Vector3 pos, string text, Property property)
     {
-        EffectObjectPool effectPool = (EffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
-        GameObject newobj = effectPool.GetPool(EffectObjectPool.E_EFFECT_TYPE.TEXT).GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        //EffectObjectPool effectPool = (EffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
+        EffectObjectPool effectPool = (EffectObjectPool)GameManager.instance.objectPoolManager.
+            m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
+        //GameObject newobj = effectPool.GetPool(EffectObjectPool.E_EFFECT_TYPE.TEXT).GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        GameObject newobj = effectPool.GetPool(EffectObjectPool.E_EFFECT_TYPE.TEXT).GetObject(
+            GameManager.instance.objectPoolManager.trsDynamicObjects);
         newobj.transform.position = pos;
 
         Color color;
@@ -124,9 +129,12 @@ public class EffectManager : MonoBehaviour
     GameObject _prefab_goalInEffect;
     public void CreateGoalInEffect(Vector3 pos)
     {
-        EffectObjectPool effectPool = (EffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
+        //EffectObjectPool effectPool = (EffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
+        EffectObjectPool effectPool = (EffectObjectPool)GameManager.instance.objectPoolManager.
+            m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
         ObjectPool pool = effectPool.GetPool(EffectObjectPool.E_EFFECT_TYPE.GOAL_IN);
-        GameObject newobj = pool.GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        //GameObject newobj = pool.GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        GameObject newobj = pool.GetObject(GameManager.instance.objectPoolManager.trsDynamicObjects);
         newobj.transform.position = pos;
         newobj.GetComponent<Effect>().EffectStart(pool);
     }
@@ -136,9 +144,12 @@ public class EffectManager : MonoBehaviour
     GameObject _prefab_explode;
     public void CreateMonsterDeathEffect(Vector3 pos)
     {
-        EffectObjectPool effectPool = (EffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
+        //EffectObjectPool effectPool = (EffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
+        EffectObjectPool effectPool = (EffectObjectPool)GameManager.instance.objectPoolManager.
+            m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
         ObjectPool pool = effectPool.GetPool(EffectObjectPool.E_EFFECT_TYPE.EXPLODE);
-        GameObject newobj = pool.GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        //GameObject newobj = pool.GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        GameObject newobj = pool.GetObject(GameManager.instance.objectPoolManager.trsDynamicObjects);
         newobj.transform.position = pos;
         newobj.GetComponent<Effect>().EffectStart(pool);
     }
@@ -146,11 +157,14 @@ public class EffectManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////skill effect
     public void CreateSkillEffect(Vector3 pos, string skillID)
     {
-        SkillEffectObjectPool skillEffectPool = (SkillEffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.SKILL_EFFECT];
+        //SkillEffectObjectPool skillEffectPool = (SkillEffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.SKILL_EFFECT];
+        SkillEffectObjectPool skillEffectPool = (SkillEffectObjectPool)GameManager.instance.objectPoolManager.
+            m_pools[(int)ObjectPoolManager.E_POOL_TYPE.SKILL_EFFECT];
         ObjectPool pool = skillEffectPool.GetPool(SkillEffectObjectPool.E_FX_TYPE.SKILL, skillID);
         if (pool == null)
             return;
-        GameObject newobj = pool.GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        //GameObject newobj = pool.GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        GameObject newobj = pool.GetObject(GameManager.instance.objectPoolManager.trsDynamicObjects);
         newobj.transform.position = pos;
 
         newobj.GetComponent<Effect>().EffectStart(pool);
@@ -159,9 +173,12 @@ public class EffectManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////tracking attack effect
     public void CreateTrackingAttackEffect(Vector3 pos, int unitNum, int dmg, Property property, Monster monster)
     {
-        SkillEffectObjectPool skillEffectPool = (SkillEffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.SKILL_EFFECT];
+        //SkillEffectObjectPool skillEffectPool = (SkillEffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.SKILL_EFFECT];
+        SkillEffectObjectPool skillEffectPool = (SkillEffectObjectPool)GameManager.instance.objectPoolManager.
+            m_pools[(int)ObjectPoolManager.E_POOL_TYPE.SKILL_EFFECT];
         ObjectPool pool = skillEffectPool.GetPool(SkillEffectObjectPool.E_FX_TYPE.TRACKING, unitNum);
-        GameObject newobj = pool.GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        //GameObject newobj = pool.GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        GameObject newobj = pool.GetObject(GameManager.instance.objectPoolManager.trsDynamicObjects);
         newobj.transform.position = pos;
         TrackingBall tacking = newobj.GetComponent<TrackingBall>();
         tacking.Init(unitNum, dmg, property, monster);
@@ -170,9 +187,12 @@ public class EffectManager : MonoBehaviour
 
     public void CreateExplodeEffect(Vector3 pos, int unitNum)
     {
-        SkillEffectObjectPool skillEffectPool = (SkillEffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.SKILL_EFFECT];
+        //SkillEffectObjectPool skillEffectPool = (SkillEffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.SKILL_EFFECT];
+        SkillEffectObjectPool skillEffectPool = (SkillEffectObjectPool)GameManager.instance.objectPoolManager.
+            m_pools[(int)ObjectPoolManager.E_POOL_TYPE.SKILL_EFFECT];
         ObjectPool pool = skillEffectPool.GetPool(SkillEffectObjectPool.E_FX_TYPE.TRACKING_EXPLODE, unitNum);
-        GameObject newobj = pool.GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        //GameObject newobj = pool.GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        GameObject newobj = pool.GetObject(GameManager.instance.objectPoolManager.trsDynamicObjects);
         newobj.transform.position = pos;
         newobj.GetComponent<Effect>().EffectStart(pool);
     }
@@ -180,26 +200,25 @@ public class EffectManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////gun attack effect
     public void CreateGunEffect(Vector3 pos, int unitNum)
     {
-        SkillEffectObjectPool skillEffectPool = (SkillEffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.SKILL_EFFECT];
+        //SkillEffectObjectPool skillEffectPool = (SkillEffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.SKILL_EFFECT];
+        SkillEffectObjectPool skillEffectPool = (SkillEffectObjectPool)GameManager.instance.objectPoolManager.
+            m_pools[(int)ObjectPoolManager.E_POOL_TYPE.SKILL_EFFECT];
         ObjectPool pool = skillEffectPool.GetPool(SkillEffectObjectPool.E_FX_TYPE.GUN, unitNum);
-        GameObject newobj = pool.GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        //GameObject newobj = pool.GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        GameObject newobj = pool.GetObject(GameManager.instance.objectPoolManager.trsDynamicObjects);
         newobj.GetComponent<Effect>().EffectStart(pool);
     }
 
     ////////////////////////////////////////////////////////////////////////////////gold effect
     public void CreateGoldEffect(Vector3 pos)
     {
-        EffectObjectPool effectPool = (EffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
+        //EffectObjectPool effectPool = (EffectObjectPool)ObjectPoolManager.instance.m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
+        EffectObjectPool effectPool = (EffectObjectPool)GameManager.instance.objectPoolManager.
+            m_pools[(int)ObjectPoolManager.E_POOL_TYPE.EFFECT];
         ObjectPool pool = effectPool.GetPool(EffectObjectPool.E_EFFECT_TYPE.GOLD);
-        GameObject newobj = pool.GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        //GameObject newobj = pool.GetObject(ObjectPoolManager.instance.trsDynamicObjects);
+        GameObject newobj = pool.GetObject(GameManager.instance.objectPoolManager.trsDynamicObjects);
         newobj.transform.position = pos;
         newobj.GetComponent<Effect>().EffectStart(pool);
     }
-
-
-    private void Awake()
-    {
-        _unique = this;
-    }
-
 }
