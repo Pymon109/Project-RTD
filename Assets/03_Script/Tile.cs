@@ -132,23 +132,25 @@ public class Tile : MonoBehaviour
 
     public void SellUnit()
     {
-        if (_unit)
+        if (_unit == null)
+            return;
+        if (_unit.IsLocked())
+            return;
+
+        GameManager.instance.player.AddGold(_unit.GetSellPoint());
+        //유닛 파는 이펙트
+
+        Skill[] skills = _unit.GetSkills();
+        for (int i = 0; i < skills.Length; i++)
         {
-            GameManager.instance.player.AddGold(_unit.GetSellPoint());
-            //유닛 파는 이펙트
-            
-            Skill[] skills = _unit.GetSkills();
-            for(int i = 0; i < skills.Length; i++)
-            {
-                if (skills[i])
-                    if (skills[i].GetTriggerType() == SkillManager.E_SKILL_TRIGGER.SELL)
-                    {
-                        //skills[i].SetTriggerConditionOn();
-                        skills[i].CheckAndCastOn();
-                    }
-            }
-            DeleteUnit();
+            if (skills[i])
+                if (skills[i].GetTriggerType() == SkillManager.E_SKILL_TRIGGER.SELL)
+                {
+                    //skills[i].SetTriggerConditionOn();
+                    skills[i].CheckAndCastOn();
+                }
         }
+        DeleteUnit();
     }
 
     public void LockUnit()

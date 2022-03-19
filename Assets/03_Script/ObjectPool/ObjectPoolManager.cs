@@ -24,4 +24,9 @@ public class ObjectPoolManager : MonoBehaviour
             ready &= m_pools[i].bPoolReady;
         return ready;
     }
+
+    public void InitObjectPool()
+    {
+
+    }
 }

@@ -67,4 +67,24 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] SoundManager m_soundManager;
     public SoundManager soundManager { get { return m_soundManager; } }
+
+    public void InitGame()
+    {
+        //오브젝트 풀 초기화
+        //플레이어 초기화
+        //미션 초기화
+        //라운드 초기화
+        //쿠폰 초기화
+
+    }
+
+    public void Btn_Retry()
+    {
+
+    }
+
+    public void Btn_Exit()
+    {
+
+    }
 }

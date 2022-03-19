@@ -145,6 +145,11 @@ public class TileControl : MonoBehaviour
 
     public void MergeUnit()
     {
+        if (_target.GetUnit().IsLocked())
+            return;
+        if (_sameUnitTile.GetUnit().IsLocked())
+            return;
+
         _target.CreateUnit();
         _sameUnitTile.DeleteUnit();
         _sameUnitTile.ActiveEffect_select(false);
